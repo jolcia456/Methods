@@ -9,8 +9,9 @@ class Generate
 {
 private:
 	int mRow;
-	int  mCol;
+	int mCol;
 	std::vector<std::vector<double>> mCoeff;
+	bool mDataCorrectness; //paramter okresla czy danych w plikach jest odpowiednia ilosc
 
 public:
 	Generate(int row) : mRow(row), mCol(row + 1)
@@ -43,7 +44,7 @@ public:
 	Generate(std::string path)
 	{
 		InputData input(path);
-		input.readDataIntoMatrix(mCoeff);
+		mDataCorrectness = datainput.readDataIntoMatrix(mCoeff);
 		mRow = input.getSize();
 	}
 
@@ -55,6 +56,11 @@ public:
 	size_t getSize()
 	{
 		return mRow;
+	}
+	
+	bool isDataCorrect()
+	{
+		return mDataCorrectness;
 	}
 
 };
