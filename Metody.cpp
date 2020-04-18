@@ -29,6 +29,13 @@ void printResults(const std::vector<double> &solution, int n)
 void checkEquationsByFourMethods(std::string path, OutputData &out, int sizeOfMatrix)
 {
 	Generate coeff(path);
+	bool dataCorrectness = coeff.isDataCorrect();
+	
+	if(!dataCorrectness)
+	{
+		std::cerr<<"Amount of data is to small. Please use files with proper amount of data for "<<sizeOfMatrix<< "size matrix.\n";
+		return;
+	}
 
 	std::vector<std::vector<double>> A = coeff.getCoeff();
 
