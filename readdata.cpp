@@ -25,34 +25,44 @@ bool InputData::readDataIntoMatrix(std::vector<std::vector<double>>& A)
 	std::getline(inputA, line);
 	int colA = std::stoi(line);
 
-	int countRows = rowA;
-	int countCols = colA;
+	int countRows = 0; //= rowA;
+	int countCols = 0; // = colA;
 
 	mRow = rowA;
 	mCol = colA + 1;
 
-	while (countRows)
+	
+	while (std::getline(inputA, line))
 	{
-		std::getline(inputA, line);
+		//std::getline(inputA, line);
 		std::stringstream s(line);
 		std::vector<double> row;
-		--countRows;
+		++countRows;
 			
-		while (countCols)
+		std::string element;
+		while (std::getline(s, element, ','))
 		{
-			std::string element;
-			std::getline(s, element, ',');
+			//std::string element;
+			//std::getline(s, element, ',');
 			double el = std::stod(element);
 			row.push_back(el);
-			--countCols;
+			++countCols;
 		}
-		countCols = colA;
+		if(countCols < colA)
+		{ 	
+			inputA.close();
+			return false;
+		}
+		countCols = 0;
 
 		row.resize(colA + 1);
 		A.push_back(row);
 	}
 
 	inputA.close();
+	
+	if(countRows < rowA)
+		return false;
 
 	std::string fullPathB = mPath + 'b' + ".txt";
 	std::cout << fullPathB << '\n';
@@ -70,17 +80,20 @@ bool InputData::readDataIntoMatrix(std::vector<std::vector<double>>& A)
 	std::getline(inputB, lineB);
 
 	int rowB = stoi(lineB);
-	int countRowsB = rowB;
+	int countRowsB = 0;
 
-	while (countRowsB)
+	while (std::getline(inputB, lineB))
 	{
-		std::getline(inputB, lineB);
+		//std::getline(inputB, lineB);
 		double el = std::stod(lineB);
 		A[rowB - countRowsB][rowB] = el;
-		--countRowsB;
+		++countRowsB;
 	}
 
 	inputB.close();
+	
+	if(countRowsB < rowB)
+		return false;
 	
 	return true;
 
