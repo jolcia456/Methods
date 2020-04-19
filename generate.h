@@ -44,7 +44,7 @@ public:
 	Generate(std::string path)
 	{
 		InputData input(path);
-		mDataCorrectness = datainput.readDataIntoMatrix(mCoeff);
+		mDataCorrectness = input.readDataIntoMatrix(mCoeff);
 		mRow = input.getSize();
 	}
 
