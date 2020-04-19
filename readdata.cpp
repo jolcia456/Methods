@@ -37,7 +37,7 @@ bool InputData::readDataIntoMatrix(std::vector<std::vector<double>>& A)
 		//std::getline(inputA, line);
 		std::stringstream s(line);
 		std::vector<double> row;
-		++countRows;
+		countRows+=1;
 			
 		std::string element;
 		while (std::getline(s, element, ','))
@@ -46,7 +46,7 @@ bool InputData::readDataIntoMatrix(std::vector<std::vector<double>>& A)
 			//std::getline(s, element, ',');
 			double el = std::stod(element);
 			row.push_back(el);
-			++countCols;
+			countCols+=1;
 		}
 		if(countCols < colA)
 		{ 	
@@ -87,7 +87,7 @@ bool InputData::readDataIntoMatrix(std::vector<std::vector<double>>& A)
 		//std::getline(inputB, lineB);
 		double el = std::stod(lineB);
 		A[rowB - countRowsB][rowB] = el;
-		++countRowsB;
+		countRowsB+=1;
 	}
 
 	inputB.close();
